@@ -1,4 +1,4 @@
-# Phase 4에서 실제 구현하며 버전 확정 예정
-requests
-pyyaml
-playwright
+requests==2.32.5
+pyyaml==6.0.3
+playwright==1.60.0
+beautifulsoup4==4.15.0
