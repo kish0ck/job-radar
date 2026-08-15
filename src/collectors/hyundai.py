@@ -7,7 +7,7 @@ talent.hyundai.com 페이지가 내부적으로 호출하는 공개 JSON API를 
 import requests
 
 API_URL = "https://talent.hyundai.com/api/rec/AP-HM-FO-02700"
-LIST_PAGE_URL = "https://talent.hyundai.com/apply/applyList.hc"
+DETAIL_PAGE_URL = "https://talent.hyundai.com/apply/applyView.hc"
 
 
 def fetch_jobs(pageblock: int = 100) -> list[dict]:
@@ -31,14 +31,17 @@ def fetch_jobs(pageblock: int = 100) -> list[dict]:
 
 
 def _normalize(job: dict) -> dict:
+    detail_url = (
+        f"{DETAIL_PAGE_URL}?recuYy={job['recuYy']}"
+        f"&recuType={job['recuType']}&recuCls={job['recuCls']}"
+    )
     return {
         "id": f"hyundai-{job['recuYy']}-{job['recuCls']}",
         "title": job["recuNoticeNm"],
         "company": "현대자동차",
         "keyword": f"{job.get('fldCodeNm', '')} {job.get('channelCodeNm', '')}",
         "experience": job.get("channelCodeNm", ""),
-        # 개별 공고 상세링크는 세션 토큰 기반이라 안정적으로 재현 불가 -> 목록 페이지로 연결
-        "url": LIST_PAGE_URL,
+        "url": detail_url,
         "posted_at": job.get("regDm", ""),
         "source": "hyundai",
     }
