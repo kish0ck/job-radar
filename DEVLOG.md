@@ -41,3 +41,8 @@ Phase 0 체크리스트에 따라, 포트폴리오화(Phase 7) 때 쓸 수 있�
 - **결과**: `src/collectors/hyundai.py`(실제 API, 61건 수집 확인),
   `src/collectors/samsung.py`(실제 HTML 파싱, 6건 수집 확인) — 둘 다 mock이 아닌
   실제 데이터로 검증 완료
+
+## 2026-08-15 — 스프린트 #5: 중복 방지 저장소
+
+- **결과**: `src/storage/sent_jobs.py` 작성 — `data/sent_jobs.json`에 `{공고ID: 발송일자}`
+  기록. 이미 발송된 ID는 다음 실행에서 걸러지는 로직을 샘플 데이터로 검증 완료
