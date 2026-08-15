@@ -1,0 +1,4 @@
+# Phase 4에서 실제 구현하며 버전 확정 예정
+requests
+pyyaml
+playwright

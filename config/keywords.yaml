@@ -1,0 +1,18 @@
+# job-radar 필터링 키워드 설정
+# 코드 수정 없이 이 파일만 바꾸면 필터 기준이 바뀝니다 (PRD Phase 2 US-3)
+
+include_keywords:  # OR 조건 - 하나라도 포함되면 후보
+  - PM
+  - PMO
+  - BR
+  - IT
+
+exclude_keywords:  # 하나라도 포함되면 무조건 제외
+  - 인턴
+  - 계약직
+  - 신입
+
+target_companies:  # 개별 크롤링 대상 (Phase 4에서 난이도 확인 후 순차 구현)
+  - 삼성
+  - LG
+  - 현대
