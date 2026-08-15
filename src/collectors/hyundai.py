@@ -4,7 +4,7 @@ talent.hyundai.com 페이지가 내부적으로 호출하는 공개 JSON API를 
 인증이 필요 없는 공개 API이며, 개인용 1일 1회 조회로는 부담 없는 수준이다.
 """
 
-import requests
+from collectors._http import polite_request
 
 API_URL = "https://talent.hyundai.com/api/rec/AP-HM-FO-02700"
 DETAIL_PAGE_URL = "https://talent.hyundai.com/apply/applyView.hc"
@@ -24,7 +24,7 @@ def fetch_jobs(pageblock: int = 100) -> list[dict]:
         "jdSec": "",
         "srcOrd": "",
     }
-    response = requests.get(API_URL, params=params, timeout=10)
+    response = polite_request("GET", API_URL, params=params)
     response.raise_for_status()
     raw_jobs = response.json()["data"]["list"]
     return [_normalize(job) for job in raw_jobs]

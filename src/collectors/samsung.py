@@ -5,8 +5,9 @@ samsungcareers.com이 목록을 그릴 때 내부적으로 호출하는 비공�
 응답은 JSON이 아니라 HTML 조각이라 BeautifulSoup으로 파싱한다.
 """
 
-import requests
 from bs4 import BeautifulSoup
+
+from collectors._http import polite_request
 
 LIST_DATA_URL = "https://www.samsungcareers.com/hr/list.data"
 LIST_PAGE_URL = "https://www.samsungcareers.com/hr/"
@@ -24,14 +25,14 @@ def fetch_jobs() -> list[dict]:
         "strOrderBy": "BB",  # 최신순
         "strEntity": "",
     }
-    response = requests.post(
+    response = polite_request(
+        "POST",
         LIST_DATA_URL,
         data=data,
         headers={
             "X-Requested-With": "XMLHttpRequest",
             "Referer": LIST_PAGE_URL,
         },
-        timeout=10,
     )
     response.raise_for_status()
     return _parse(response.text)
