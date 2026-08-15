@@ -1,0 +1,39 @@
+name: job-radar daily run
+
+on:
+  schedule:
+    - cron: "0 23 * * *" # 매일 08:00 KST (UTC 23:00 전날)
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 의존성 설치
+        run: pip install -r requirements.txt
+
+      - name: 파이프라인 실행
+        working-directory: src
+        env:
+          SARAMIN_API_KEY: ${{ secrets.SARAMIN_API_KEY }}
+          EMAIL_ADDRESS: ${{ secrets.EMAIL_ADDRESS }}
+          EMAIL_APP_PASSWORD: ${{ secrets.EMAIL_APP_PASSWORD }}
+          RECEIVER_EMAIL: ${{ secrets.RECEIVER_EMAIL }}
+        run: python3 main.py
+
+      - name: 결과 커밋 (발송 기록 + 대시보드)
+        run: |
+          git config user.name "job-radar-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/sent_jobs.json docs/index.html
+          git diff --cached --quiet || git commit -m "chore: 자동 실행 결과 갱신 ($(date -u +%Y-%m-%d))"
+          git push
