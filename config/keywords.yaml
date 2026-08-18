@@ -14,5 +14,6 @@ exclude_keywords:  # 하나라도 포함되면 무조건 제외
 
 target_companies:  # 개별 크롤링 대상 (Phase 4에서 난이도 확인 후 순차 구현)
   - 삼성
-  - LG
+  - LG (예정, Playwright 필요)
   - 현대
+  - 신세계 (경력 + IT/디지털만 API 단계에서 필터링)

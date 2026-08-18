@@ -2,7 +2,7 @@
 
 import datetime
 
-from collectors import hyundai, samsung, saramin
+from collectors import hyundai, samsung, saramin, shinsegae
 from dashboard.generate import generate_dashboard
 from filters.keyword_filter import filter_jobs, load_keywords
 from notifiers.email_notifier import send_notification
@@ -30,8 +30,9 @@ def run() -> None:
     )
     hyundai_jobs = _collect("hyundai", hyundai.fetch_jobs, run_log)
     samsung_jobs = _collect("samsung", samsung.fetch_jobs, run_log)
+    shinsegae_jobs = _collect("shinsegae", shinsegae.fetch_jobs, run_log)
 
-    all_jobs = saramin_jobs + hyundai_jobs + samsung_jobs
+    all_jobs = saramin_jobs + hyundai_jobs + samsung_jobs + shinsegae_jobs
     print(f"[수집] {run_log['sources']}")
 
     matched_jobs = filter_jobs(all_jobs, keywords_config)
