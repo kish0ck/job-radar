@@ -42,10 +42,11 @@ def run() -> None:
     new_jobs = filter_new_jobs(matched_jobs, sent_ids)
     print(f"[중복 제거] 신규 {len(new_jobs)}건")
 
-    send_notification(new_jobs)
+    updated_sent_ids = mark_as_sent(new_jobs, sent_ids)
+
+    send_notification(new_jobs, run_log, updated_sent_ids)
     print("[알림] 발송 완료" if new_jobs else "[알림] 신규 공고 없음 - 발송 생략")
 
-    updated_sent_ids = mark_as_sent(new_jobs, sent_ids)
     save_sent_ids(updated_sent_ids)
     print("[기록] sent_jobs.json 갱신 완료")
 
