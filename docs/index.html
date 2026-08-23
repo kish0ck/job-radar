@@ -1,35 +1,345 @@
 <!doctype html>
-<html lang="ko">
+<html lang="ko" class="dark">
 <head>
 <meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
 <title>job-radar 대시보드</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<script>
+tailwind.config = {
+    darkMode: "class",
+    theme: {
+        extend: {
+            colors: {
+                background: "#131313", surface: "#131313",
+                "surface-container-lowest": "#0e0e0e",
+                "surface-container-low": "#1c1b1b",
+                "surface-container": "#201f1f",
+                "surface-container-high": "#2a2a2a",
+                "on-background": "#e5e2e1", "on-surface-variant": "#c4c7c8",
+                primary: "#ffffff", "on-primary": "#2f3131",
+                "outline-variant": "#444748", outline: "#8e9192",
+                error: "#ffb4ab",
+            },
+            borderRadius: { DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px" },
+            spacing: { xs: "4px", sm: "8px", md: "16px", lg: "24px", xl: "48px",
+                       "container-max": "1440px", gutter: "20px" },
+            fontFamily: { sans: ["Inter", "sans-serif"], mono: ["JetBrains Mono", "monospace"] },
+        }
+    }
+}
+</script>
 <style>
-  body { font-family: -apple-system, sans-serif; max-width: 720px; margin: 40px auto; padding: 0 16px; color: #222; background: #fff; }
-  h1 { font-size: 1.4rem; }
-  h2 { font-size: 1.1rem; margin-top: 32px; border-bottom: 1px solid #ddd; padding-bottom: 4px; }
-  table { width: 100%; border-collapse: collapse; }
-  td, th { text-align: left; padding: 6px 8px; border-bottom: 1px solid #eee; }
-  .ok { color: #2a7a2a; }
-  .error { color: #c0392b; }
-  ul { padding-left: 20px; }
-  li { margin: 6px 0; }
-  .meta { color: #888; font-size: 0.9rem; }
+  body { background-color: #131313; color: #e5e2e1; font-family: 'Inter', sans-serif; }
+  .material-symbols-outlined { font-family: 'Material Symbols Outlined'; font-size: 20px;
+    vertical-align: middle; }
+  .glass-card { background-color: #1c1b1b; border: 1px solid #444748; }
+  .status-normal { border-left: 4px solid #ffffff; }
+  .status-error { border-left: 4px solid #ffb4ab; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
 </style>
 </head>
-<body>
-  <h1>job-radar 대시보드</h1>
-  <p class="meta">마지막 실행: 2026-08-23T22:11:09</p>
 
-  <h2>실행 상태</h2>
-  <table>
-    <tr><th>소스</th><th>수집 건수</th><th>상태</th></tr>
-    <tr><td>saramin</td><td>5건</td><td class="ok">정상</td></tr><tr><td>hyundai</td><td>63건</td><td class="ok">정상</td></tr><tr><td>samsung</td><td>9건</td><td class="ok">정상</td></tr><tr><td>shinsegae</td><td>11건</td><td class="ok">정상</td></tr>
-  </table>
-
-  <h2>오늘의 추천 공고 (0건)</h2>
-  <ul><li>오늘은 신규 매칭 공고가 없습니다.</li></ul>
-
-  <h2>발송 이력 (21건 누적)</h2>
-  <ul><li>2026-08-20 — <a href="https://job.shinsegae.com/rcrut/detail/5286" target="_blank">[신세계디에프] ㈜신세계디에프(면세점) 시스템 경력직 채용</a></li><li>2026-08-18 — <a href="https://job.shinsegae.com/rcrut/detail/5236" target="_blank">[이마트에브리데이] 이마트에브리데이 웹개발 경력사원 모집</a></li><li>2026-08-18 — <a href="https://job.shinsegae.com/rcrut/detail/5241" target="_blank">[신세계아이앤씨] [신세계아이앤씨] 정보보안 분야 인재모집(채용 시 마감)</a></li><li>2026-08-18 — <a href="https://job.shinsegae.com/rcrut/detail/5249" target="_blank">[신세계아이앤씨] [신세계아이앤씨] SW엔지니어링(JAVA 개발/운영, WEBㆍAPP 개발/운영) 직무 인재모집(채용 시 마감)</a></li><li>2026-08-18 — <a href="https://job.shinsegae.com/rcrut/detail/5250" target="_blank">[신세계아이앤씨] [신세계아이앤씨] 임베디드엔지니어링 직무 인재모집(채용 시 마감)</a></li><li>2026-08-18 — <a href="https://job.shinsegae.com/rcrut/detail/5254" target="_blank">[신세계아이앤씨] [신세계아이앤씨] 애플리케이션 아키텍처(AA) 직무 인재모집(채용 시 마감)</a></li><li>2026-08-18 — <a href="https://job.shinsegae.com/rcrut/detail/5255" target="_blank">[신세계아이앤씨] [신세계아이앤씨] AI서비스개발 직무 인재모집(채용 시 마감)</a></li><li>2026-08-18 — <a href="https://job.shinsegae.com/rcrut/detail/5256" target="_blank">[신세계아이앤씨] [신세계아이앤씨] 프라이빗클라우드 시스템엔지니어링(SE) 직무 인재모집(채용 시 마감)</a></li><li>2026-08-18 — <a href="https://job.shinsegae.com/rcrut/detail/5257" target="_blank">[신세계아이앤씨] [신세계아이앤씨] 퍼블릭클라우드 솔루션아키텍처(SA) 직무 인재모집(채용 시 마감)</a></li><li>2026-08-18 — <a href="https://job.shinsegae.com/rcrut/detail/5266" target="_blank">[신세계아이앤씨] [신세계아이앤씨] SAP 분야 인재모집(채용 시 마감)</a></li><li>2026-08-15 — <a href="https://talent.hyundai.com/apply/applyView.hc?recuYy=2025&recuType=N2&recuCls=266" target="_blank">[현대자동차] [통합보안] 보안점검(분석)</a></li><li>2026-08-15 — <a href="https://talent.hyundai.com/apply/applyView.hc?recuYy=2026&recuType=N2&recuCls=104" target="_blank">[현대자동차] [AVP] 모빌리티 서비스 Frontend Engineer</a></li><li>2026-08-15 — <a href="https://talent.hyundai.com/apply/applyView.hc?recuYy=2026&recuType=N2&recuCls=224" target="_blank">[현대자동차] [AVP] 모빌리티 서비스 Software Engineer for Map</a></li><li>2026-08-15 — <a href="https://talent.hyundai.com/apply/applyView.hc?recuYy=2026&recuType=N2&recuCls=299" target="_blank">[현대자동차] [ICT] Quality Assurance Manager - 고객 채널 서비스</a></li><li>2026-08-15 — <a href="https://talent.hyundai.com/apply/applyView.hc?recuYy=2026&recuType=N2&recuCls=300" target="_blank">[현대자동차] [통합보안] Mobility Security Engineer - 차량보안</a></li><li>2026-08-15 — <a href="https://talent.hyundai.com/apply/applyView.hc?recuYy=2026&recuType=N2&recuCls=302" target="_blank">[현대자동차] [통합보안] Mobility Security Engineer - AD보안</a></li><li>2026-08-15 — <a href="https://talent.hyundai.com/apply/applyView.hc?recuYy=2026&recuType=N2&recuCls=314" target="_blank">[현대자동차] [ICT] Data Architect</a></li><li>2026-08-15 — <a href="https://www.samsungcareers.com/hr/" target="_blank">[삼성화재] 경력사원 채용(마케팅, 데이터 플랫폼, 영업관리, 상품/계리, 언더라이팅, 글로벌사업, IT, 미디어, 의료심사)</a></li><li>2026-08-15 — <a href="https://www.saramin.co.kr/zf_user/jobs/relay/view?rec_idx=45671001" target="_blank">[NHN] [NHN] IT서비스기획 PM 채용</a></li><li>2026-08-15 — <a href="https://www.saramin.co.kr/zf_user/jobs/relay/view?rec_idx=45671002" target="_blank">[쿠팡] PMO 사무국 운영 담당자 모집</a></li><li>2026-08-15 — <a href="https://www.saramin.co.kr/zf_user/jobs/relay/view?rec_idx=45671003" target="_blank">[당근마켓] 사업개발(BR) 담당자 채용</a></li></ul>
+<body class="min-h-screen antialiased">
+<header class="flex justify-between items-center w-full px-lg h-16 border-b border-outline-variant
+               bg-surface sticky top-0 z-40 max-w-container-max mx-auto">
+  <div class="flex items-center gap-sm">
+    <span class="material-symbols-outlined text-primary">radar</span>
+    <div>
+      <h1 class="text-xl font-bold text-primary leading-tight">job-radar</h1>
+      <p class="text-xs text-on-surface-variant">Recruitment Monitor</p>
+    </div>
+  </div>
+  <div class="flex items-center text-on-surface-variant text-xs mono bg-surface-container
+              py-xs px-sm rounded border border-outline-variant">
+    <span class="material-symbols-outlined text-[16px] mr-xs">update</span>
+    마지막 실행: 2026-08-23T22:15:03
+  </div>
+</header>
+<main class="p-lg max-w-container-max mx-auto space-y-xl">
+  <section>
+    <h2 class="text-xs text-on-surface-variant mb-md uppercase tracking-widest">수집 현황</h2>
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-md">
+      
+        <div class="glass-card rounded-lg p-md status-normal flex flex-col justify-between h-24">
+          <div class="flex justify-between items-start">
+            <span class="text-base font-bold text-primary">사람인</span>
+            <span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
+          </div>
+          <div class="flex justify-between items-end mt-auto">
+            <span class="text-sm text-on-surface-variant">5건</span>
+            <span class="text-xs mono text-primary">정상</span>
+          </div>
+        </div>
+        <div class="glass-card rounded-lg p-md status-normal flex flex-col justify-between h-24">
+          <div class="flex justify-between items-start">
+            <span class="text-base font-bold text-primary">현대차</span>
+            <span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
+          </div>
+          <div class="flex justify-between items-end mt-auto">
+            <span class="text-sm text-on-surface-variant">63건</span>
+            <span class="text-xs mono text-primary">정상</span>
+          </div>
+        </div>
+        <div class="glass-card rounded-lg p-md status-normal flex flex-col justify-between h-24">
+          <div class="flex justify-between items-start">
+            <span class="text-base font-bold text-primary">삼성</span>
+            <span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
+          </div>
+          <div class="flex justify-between items-end mt-auto">
+            <span class="text-sm text-on-surface-variant">9건</span>
+            <span class="text-xs mono text-primary">정상</span>
+          </div>
+        </div>
+        <div class="glass-card rounded-lg p-md status-normal flex flex-col justify-between h-24">
+          <div class="flex justify-between items-start">
+            <span class="text-base font-bold text-primary">신세계</span>
+            <span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
+          </div>
+          <div class="flex justify-between items-end mt-auto">
+            <span class="text-sm text-on-surface-variant">11건</span>
+            <span class="text-xs mono text-primary">정상</span>
+          </div>
+        </div>
+    </div>
+  </section>
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-xl">
+    <section class="lg:col-span-8 space-y-sm">
+      <h2 class="text-lg font-bold text-primary border-b border-outline-variant pb-sm mb-md">
+        오늘의 추천 공고 (0건)
+      </h2>
+      
+        <div class="glass-card rounded-lg p-md text-on-surface-variant text-sm">
+          오늘은 신규 매칭 공고가 없습니다.
+        </div>
+    </section>
+    <section class="lg:col-span-4 space-y-md">
+      <h2 class="text-lg font-bold text-primary border-b border-outline-variant pb-sm mb-md">
+        발송 이력 (21건 누적)
+      </h2>
+      <div class="glass-card rounded-lg p-md">
+        
+        <div class="mb-md">
+          <h4 class="text-xs text-on-surface-variant uppercase tracking-widest mb-sm
+                     flex items-center gap-xs">
+            <span class="w-2 h-2 rounded-full bg-primary inline-block"></span> 2026-08-20
+          </h4>
+          <div class="space-y-xs pl-sm border-l border-outline-variant ml-[3px]">
+            
+          <div class="flex gap-sm py-xs relative">
+            <div class="absolute w-2 h-2 rounded-full bg-background border border-outline-variant
+                        -left-[5px] top-2"></div>
+            <div class="flex-1 pl-sm">
+              <a href="https://job.shinsegae.com/rcrut/detail/5286" target="_blank" rel="noopener"
+                 class="text-sm text-primary font-medium hover:underline">신세계디에프</a>
+              <p class="text-xs text-on-surface-variant truncate">㈜신세계디에프(면세점) 시스템 경력직 채용</p>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="mb-md">
+          <h4 class="text-xs text-on-surface-variant uppercase tracking-widest mb-sm
+                     flex items-center gap-xs">
+            <span class="w-2 h-2 rounded-full bg-primary inline-block"></span> 2026-08-18
+          </h4>
+          <div class="space-y-xs pl-sm border-l border-outline-variant ml-[3px]">
+            
+          <div class="flex gap-sm py-xs relative">
+            <div class="absolute w-2 h-2 rounded-full bg-background border border-outline-variant
+                        -left-[5px] top-2"></div>
+            <div class="flex-1 pl-sm">
+              <a href="https://job.shinsegae.com/rcrut/detail/5236" target="_blank" rel="noopener"
+                 class="text-sm text-primary font-medium hover:underline">이마트에브리데이</a>
+              <p class="text-xs text-on-surface-variant truncate">이마트에브리데이 웹개발 경력사원 모집</p>
+            </div>
+          </div>
+          <div class="flex gap-sm py-xs relative">
+            <div class="absolute w-2 h-2 rounded-full bg-background border border-outline-variant
+                        -left-[5px] top-2"></div>
+            <div class="flex-1 pl-sm">
+              <a href="https://job.shinsegae.com/rcrut/detail/5241" target="_blank" rel="noopener"
+                 class="text-sm text-primary font-medium hover:underline">신세계아이앤씨</a>
+              <p class="text-xs text-on-surface-variant truncate">[신세계아이앤씨] 정보보안 분야 인재모집(채용 시 마감)</p>
+            </div>
+          </div>
+          <div class="flex gap-sm py-xs relative">
+            <div class="absolute w-2 h-2 rounded-full bg-background border border-outline-variant
+                        -left-[5px] top-2"></div>
+            <div class="flex-1 pl-sm">
+              <a href="https://job.shinsegae.com/rcrut/detail/5249" target="_blank" rel="noopener"
+                 class="text-sm text-primary font-medium hover:underline">신세계아이앤씨</a>
+              <p class="text-xs text-on-surface-variant truncate">[신세계아이앤씨] SW엔지니어링(JAVA 개발/운영, WEBㆍAPP 개발/운영) 직무 인재모집(채용 시 마감)</p>
+            </div>
+          </div>
+          <div class="flex gap-sm py-xs relative">
+            <div class="absolute w-2 h-2 rounded-full bg-background border border-outline-variant
+                        -left-[5px] top-2"></div>
+            <div class="flex-1 pl-sm">
+              <a href="https://job.shinsegae.com/rcrut/detail/5250" target="_blank" rel="noopener"
+                 class="text-sm text-primary font-medium hover:underline">신세계아이앤씨</a>
+              <p class="text-xs text-on-surface-variant truncate">[신세계아이앤씨] 임베디드엔지니어링 직무 인재모집(채용 시 마감)</p>
+            </div>
+          </div>
+          <div class="flex gap-sm py-xs relative">
+            <div class="absolute w-2 h-2 rounded-full bg-background border border-outline-variant
+                        -left-[5px] top-2"></div>
+            <div class="flex-1 pl-sm">
+              <a href="https://job.shinsegae.com/rcrut/detail/5254" target="_blank" rel="noopener"
+                 class="text-sm text-primary font-medium hover:underline">신세계아이앤씨</a>
+              <p class="text-xs text-on-surface-variant truncate">[신세계아이앤씨] 애플리케이션 아키텍처(AA) 직무 인재모집(채용 시 마감)</p>
+            </div>
+          </div>
+          <div class="flex gap-sm py-xs relative">
+            <div class="absolute w-2 h-2 rounded-full bg-background border border-outline-variant
+                        -left-[5px] top-2"></div>
+            <div class="flex-1 pl-sm">
+              <a href="https://job.shinsegae.com/rcrut/detail/5255" target="_blank" rel="noopener"
+                 class="text-sm text-primary font-medium hover:underline">신세계아이앤씨</a>
+              <p class="text-xs text-on-surface-variant truncate">[신세계아이앤씨] AI서비스개발 직무 인재모집(채용 시 마감)</p>
+            </div>
+          </div>
+          <div class="flex gap-sm py-xs relative">
+            <div class="absolute w-2 h-2 rounded-full bg-background border border-outline-variant
+                        -left-[5px] top-2"></div>
+            <div class="flex-1 pl-sm">
+              <a href="https://job.shinsegae.com/rcrut/detail/5256" target="_blank" rel="noopener"
+                 class="text-sm text-primary font-medium hover:underline">신세계아이앤씨</a>
+              <p class="text-xs text-on-surface-variant truncate">[신세계아이앤씨] 프라이빗클라우드 시스템엔지니어링(SE) 직무 인재모집(채용 시 마감)</p>
+            </div>
+          </div>
+          <div class="flex gap-sm py-xs relative">
+            <div class="absolute w-2 h-2 rounded-full bg-background border border-outline-variant
+                        -left-[5px] top-2"></div>
+            <div class="flex-1 pl-sm">
+              <a href="https://job.shinsegae.com/rcrut/detail/5257" target="_blank" rel="noopener"
+                 class="text-sm text-primary font-medium hover:underline">신세계아이앤씨</a>
+              <p class="text-xs text-on-surface-variant truncate">[신세계아이앤씨] 퍼블릭클라우드 솔루션아키텍처(SA) 직무 인재모집(채용 시 마감)</p>
+            </div>
+          </div>
+          <div class="flex gap-sm py-xs relative">
+            <div class="absolute w-2 h-2 rounded-full bg-background border border-outline-variant
+                        -left-[5px] top-2"></div>
+            <div class="flex-1 pl-sm">
+              <a href="https://job.shinsegae.com/rcrut/detail/5266" target="_blank" rel="noopener"
+                 class="text-sm text-primary font-medium hover:underline">신세계아이앤씨</a>
+              <p class="text-xs text-on-surface-variant truncate">[신세계아이앤씨] SAP 분야 인재모집(채용 시 마감)</p>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="mb-md">
+          <h4 class="text-xs text-on-surface-variant uppercase tracking-widest mb-sm
+                     flex items-center gap-xs">
+            <span class="w-2 h-2 rounded-full bg-primary inline-block"></span> 2026-08-15
+          </h4>
+          <div class="space-y-xs pl-sm border-l border-outline-variant ml-[3px]">
+            
+          <div class="flex gap-sm py-xs relative">
+            <div class="absolute w-2 h-2 rounded-full bg-background border border-outline-variant
+                        -left-[5px] top-2"></div>
+            <div class="flex-1 pl-sm">
+              <a href="https://talent.hyundai.com/apply/applyView.hc?recuYy=2025&recuType=N2&recuCls=266" target="_blank" rel="noopener"
+                 class="text-sm text-primary font-medium hover:underline">현대자동차</a>
+              <p class="text-xs text-on-surface-variant truncate">[통합보안] 보안점검(분석)</p>
+            </div>
+          </div>
+          <div class="flex gap-sm py-xs relative">
+            <div class="absolute w-2 h-2 rounded-full bg-background border border-outline-variant
+                        -left-[5px] top-2"></div>
+            <div class="flex-1 pl-sm">
+              <a href="https://talent.hyundai.com/apply/applyView.hc?recuYy=2026&recuType=N2&recuCls=104" target="_blank" rel="noopener"
+                 class="text-sm text-primary font-medium hover:underline">현대자동차</a>
+              <p class="text-xs text-on-surface-variant truncate">[AVP] 모빌리티 서비스 Frontend Engineer</p>
+            </div>
+          </div>
+          <div class="flex gap-sm py-xs relative">
+            <div class="absolute w-2 h-2 rounded-full bg-background border border-outline-variant
+                        -left-[5px] top-2"></div>
+            <div class="flex-1 pl-sm">
+              <a href="https://talent.hyundai.com/apply/applyView.hc?recuYy=2026&recuType=N2&recuCls=224" target="_blank" rel="noopener"
+                 class="text-sm text-primary font-medium hover:underline">현대자동차</a>
+              <p class="text-xs text-on-surface-variant truncate">[AVP] 모빌리티 서비스 Software Engineer for Map</p>
+            </div>
+          </div>
+          <div class="flex gap-sm py-xs relative">
+            <div class="absolute w-2 h-2 rounded-full bg-background border border-outline-variant
+                        -left-[5px] top-2"></div>
+            <div class="flex-1 pl-sm">
+              <a href="https://talent.hyundai.com/apply/applyView.hc?recuYy=2026&recuType=N2&recuCls=299" target="_blank" rel="noopener"
+                 class="text-sm text-primary font-medium hover:underline">현대자동차</a>
+              <p class="text-xs text-on-surface-variant truncate">[ICT] Quality Assurance Manager - 고객 채널 서비스</p>
+            </div>
+          </div>
+          <div class="flex gap-sm py-xs relative">
+            <div class="absolute w-2 h-2 rounded-full bg-background border border-outline-variant
+                        -left-[5px] top-2"></div>
+            <div class="flex-1 pl-sm">
+              <a href="https://talent.hyundai.com/apply/applyView.hc?recuYy=2026&recuType=N2&recuCls=300" target="_blank" rel="noopener"
+                 class="text-sm text-primary font-medium hover:underline">현대자동차</a>
+              <p class="text-xs text-on-surface-variant truncate">[통합보안] Mobility Security Engineer - 차량보안</p>
+            </div>
+          </div>
+          <div class="flex gap-sm py-xs relative">
+            <div class="absolute w-2 h-2 rounded-full bg-background border border-outline-variant
+                        -left-[5px] top-2"></div>
+            <div class="flex-1 pl-sm">
+              <a href="https://talent.hyundai.com/apply/applyView.hc?recuYy=2026&recuType=N2&recuCls=302" target="_blank" rel="noopener"
+                 class="text-sm text-primary font-medium hover:underline">현대자동차</a>
+              <p class="text-xs text-on-surface-variant truncate">[통합보안] Mobility Security Engineer - AD보안</p>
+            </div>
+          </div>
+          <div class="flex gap-sm py-xs relative">
+            <div class="absolute w-2 h-2 rounded-full bg-background border border-outline-variant
+                        -left-[5px] top-2"></div>
+            <div class="flex-1 pl-sm">
+              <a href="https://talent.hyundai.com/apply/applyView.hc?recuYy=2026&recuType=N2&recuCls=314" target="_blank" rel="noopener"
+                 class="text-sm text-primary font-medium hover:underline">현대자동차</a>
+              <p class="text-xs text-on-surface-variant truncate">[ICT] Data Architect</p>
+            </div>
+          </div>
+          <div class="flex gap-sm py-xs relative">
+            <div class="absolute w-2 h-2 rounded-full bg-background border border-outline-variant
+                        -left-[5px] top-2"></div>
+            <div class="flex-1 pl-sm">
+              <a href="https://www.samsungcareers.com/hr/" target="_blank" rel="noopener"
+                 class="text-sm text-primary font-medium hover:underline">삼성화재</a>
+              <p class="text-xs text-on-surface-variant truncate">경력사원 채용(마케팅, 데이터 플랫폼, 영업관리, 상품/계리, 언더라이팅, 글로벌사업, IT, 미디어, 의료심사)</p>
+            </div>
+          </div>
+          <div class="flex gap-sm py-xs relative">
+            <div class="absolute w-2 h-2 rounded-full bg-background border border-outline-variant
+                        -left-[5px] top-2"></div>
+            <div class="flex-1 pl-sm">
+              <a href="https://www.saramin.co.kr/zf_user/jobs/relay/view?rec_idx=45671001" target="_blank" rel="noopener"
+                 class="text-sm text-primary font-medium hover:underline">NHN</a>
+              <p class="text-xs text-on-surface-variant truncate">[NHN] IT서비스기획 PM 채용</p>
+            </div>
+          </div>
+          <div class="flex gap-sm py-xs relative">
+            <div class="absolute w-2 h-2 rounded-full bg-background border border-outline-variant
+                        -left-[5px] top-2"></div>
+            <div class="flex-1 pl-sm">
+              <a href="https://www.saramin.co.kr/zf_user/jobs/relay/view?rec_idx=45671002" target="_blank" rel="noopener"
+                 class="text-sm text-primary font-medium hover:underline">쿠팡</a>
+              <p class="text-xs text-on-surface-variant truncate">PMO 사무국 운영 담당자 모집</p>
+            </div>
+          </div>
+          <div class="flex gap-sm py-xs relative">
+            <div class="absolute w-2 h-2 rounded-full bg-background border border-outline-variant
+                        -left-[5px] top-2"></div>
+            <div class="flex-1 pl-sm">
+              <a href="https://www.saramin.co.kr/zf_user/jobs/relay/view?rec_idx=45671003" target="_blank" rel="noopener"
+                 class="text-sm text-primary font-medium hover:underline">당근마켓</a>
+              <p class="text-xs text-on-surface-variant truncate">사업개발(BR) 담당자 채용</p>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
 </body>
 </html>
