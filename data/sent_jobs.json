@@ -167,6 +167,12 @@
     "title": "경력사원 채용(하이테크 시공/공무/설계)",
     "url": "https://www.samsungcareers.com/hr/"
   },
+  "samsung-23440": {
+    "company": "삼성전자 DX부문",
+    "sent_at": "2026-11-11",
+    "title": "경력사원 채용(Visual Display, Digital Appliances, 생산기술연구소, Global CS센터, Global EHS실, 한국총괄)",
+    "url": "https://www.samsungcareers.com/hr/"
+  },
   "saramin-45671001": {
     "company": "NHN",
     "sent_at": "2026-08-15",
@@ -268,5 +274,11 @@
     "sent_at": "2026-10-29",
     "title": "이마트에브리데이 서비스기획 경력사원 모집",
     "url": "https://job.shinsegae.com/rcrut/detail/5413"
+  },
+  "shinsegae-5440": {
+    "company": "조선호텔앤리조트",
+    "sent_at": "2026-11-11",
+    "title": "(주)조선호텔앤리조트 공사관리 PM 경력 채용",
+    "url": "https://job.shinsegae.com/rcrut/detail/5440"
   }
 }
